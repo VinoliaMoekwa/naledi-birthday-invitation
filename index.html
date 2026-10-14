@@ -743,13 +743,15 @@ function fitPhone(){
  svg.setAttribute('viewBox','0 0 1080 '+canvasHeight);
  svg.setAttribute('preserveAspectRatio','xMidYMid meet');
  originalChildren[0].setAttribute('height',canvasHeight);
- if(imageRect)imageRect.setAttribute('y',210+(canvasHeight-1350)*.48);
+ if(imageRect){imageRect.setAttribute('x','64');imageRect.setAttribute('width','1056');imageRect.setAttribute('height','1120');imageRect.setAttribute('y',Math.max(240,210+(canvasHeight-1350)*.48-125));}
  for(const el of [buttonRect,buttonText])if(el)el.setAttribute('transform','translate(557 '+(canvasHeight*.875)+') scale(1.6) translate(-557 -1118.5)');
 }
+let detailNodes;
 function fitDetails(){
  const ds=details.querySelector('svg');const h=Math.max(1350,1080*(window.innerHeight-64)/window.innerWidth);
  ds.setAttribute('viewBox','0 0 1080 '+h);ds.setAttribute('preserveAspectRatio','xMidYMid meet');
- const group=ds.querySelector('g');const nodes=[...group.children];nodes[0].setAttribute('height',h);
+ const group=ds.querySelector('g');const nodes=detailNodes||(detailNodes=[...group.children]);nodes[0].setAttribute('height',h);
+ if(!ds.querySelector('.details-heading')){const titleGroup=document.createElementNS('http://www.w3.org/2000/svg','g');titleGroup.setAttribute('class','details-heading');titleGroup.setAttribute('transform','translate(499 170) scale(1.6) translate(-499 -170)');group.appendChild(titleGroup);nodes.slice(202,208).forEach(e=>titleGroup.appendChild(e));}
  ds.querySelectorAll('clipPath rect').forEach(r=>r.setAttribute('height',h));
  nodes.forEach((e,i)=>{if(i>=1&&i<=198&&e.getAttribute('d')?.includes('13')){const first=e.getAttribute('d').match(/^M[\d.]+ ([\d.]+)/);if(first&&Number(first[1])>1200)e.setAttribute('transform','translate(0 '+(h-1350)+')')}});
  if(nodes[199])nodes[199].setAttribute('y',170+(h-1350)*.36);
