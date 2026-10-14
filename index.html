@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Princess Naledi’s Royal Five-ness</title><style>
 *{box-sizing:border-box}html{min-height:100%;background:#76d7ea}body{margin:0;background:#76d7ea;font-family:Georgia,serif;color:#633a91;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:12px 0}main{width:min(100%,640px,calc((100svh - 24px)*.8));margin:0 auto}.card{position:relative;aspect-ratio:4/5;overflow:hidden;background:#76d7ea}.card svg{display:block;width:100%;height:100%}[hidden]{display:none!important}.open{position:absolute;left:32.59%;top:79.92%;width:37.96%;height:5.86%;min-height:44px;border:0;background:transparent;border-radius:999px;cursor:pointer}.open:hover{box-shadow:0 0 0 3px #fff8}.open:focus-visible{outline:4px solid white;outline-offset:4px}.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.back{display:block;min-height:44px;margin:14px auto;padding:10px 24px;border:1px solid #633a91;border-radius:30px;background:white;color:#633a91;cursor:pointer;font:inherit}#details{width:min(100%,calc((100svh - 90px)*.8));margin:auto}.reveal{animation:reveal .3s ease-out}@keyframes reveal{from{opacity:0}to{opacity:1}}.flake{pointer-events:none}
-html,body{height:100%;padding:0}body{display:block}main{width:100%;max-width:none;margin:0;min-height:100svh}.card{width:100%;height:100svh;aspect-ratio:auto}#opening svg{width:100%;height:100%}.open{top:auto;bottom:9%;left:32.59%;width:37.96%;height:5.86%;min-height:48px}#details{width:100%;margin:0;min-height:100svh;position:relative}#details .card{height:calc(100svh - 64px);width:100%;aspect-ratio:auto}#details .back{margin:8px auto}</style></head><body><main><section id="opening" class="card" aria-label="Princess Naledi’s Royal Five-ness invitation"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" aria-hidden="true">
+html,body{height:100%;padding:0}body{display:block}main{width:100%;max-width:none;margin:0;min-height:100svh}.card{width:100%;height:100svh;aspect-ratio:auto}#opening svg{width:100%;height:100%}.open{top:auto;bottom:9%;left:32.59%;width:37.96%;height:5.86%;min-height:48px}#details{width:100%;margin:0;min-height:100svh;position:relative}#details .card{height:calc(100svh - 64px);width:100%;aspect-ratio:auto}#details .back{margin:8px auto}.open{left:21.2%;width:60.74%;top:84%;bottom:auto;height:7%;min-height:56px}</style></head><body><main><section id="opening" class="card" aria-label="Princess Naledi’s Royal Five-ness invitation"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none" aria-hidden="true">
 <rect width="1080" height="1350" fill="#76D7EA" />
 <mask id="path-1-outside-1_25_2" maskUnits="userSpaceOnUse" x="303" y="142" width="388" height="66" fill="black">
 <rect fill="white" x="303" y="142" width="388" height="66" />
@@ -730,6 +730,10 @@ document.getElementById('open').addEventListener('click',()=>{opening.hidden=tru
 document.getElementById('back').addEventListener('click',()=>{details.hidden=true;opening.hidden=false;document.getElementById('open').focus({preventScroll:true});window.scrollTo(0,0)});
 const svg=opening.querySelector('svg');
 const originalChildren=[...svg.children];
+const headingGroup=document.createElementNS('http://www.w3.org/2000/svg','g');
+svg.insertBefore(headingGroup,originalChildren[1]);
+originalChildren.slice(1,7).forEach(el=>headingGroup.appendChild(el));
+headingGroup.setAttribute('transform','translate(497 140) scale(1.6) translate(-497 -140)');
 const imageRect=originalChildren.find(e=>e.tagName==='rect'&&e.getAttribute('fill')?.startsWith('url('));
 const buttonRect=originalChildren.find(e=>e.tagName==='rect'&&e.getAttribute('x')==='352');
 const buttonText=buttonRect?.nextElementSibling;
@@ -740,8 +744,7 @@ function fitPhone(){
  svg.setAttribute('preserveAspectRatio','xMidYMid meet');
  originalChildren[0].setAttribute('height',canvasHeight);
  if(imageRect)imageRect.setAttribute('y',210+(canvasHeight-1350)*.48);
- const delta=canvasHeight*.8508-1079;
- for(const el of [buttonRect,buttonText])if(el)el.setAttribute('transform','translate(0 '+delta+')');
+ for(const el of [buttonRect,buttonText])if(el)el.setAttribute('transform','translate(557 '+(canvasHeight*.875)+') scale(1.6) translate(-557 -1118.5)');
 }
 function fitDetails(){
  const ds=details.querySelector('svg');const h=Math.max(1350,1080*(window.innerHeight-64)/window.innerWidth);
